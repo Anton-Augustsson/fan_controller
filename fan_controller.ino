@@ -61,7 +61,7 @@ void setup(void)
 }
 void loop(void)
 {
-  sensors.requestTemperatures(); // Send the command to get temperature readings
+  sensors.requestTemperatures(); 
   float temp = sensors.getTempCByIndex(0);
   
   display.clearDisplay();
@@ -70,7 +70,7 @@ void loop(void)
   display.setCursor(x_display, y_display_row1);
   display.print(temp);
 
-  //Mode
+  //Menu
   pushbutton_val = digitalRead(Button_Data_pin);
   if (pushbutton_val == HIGH && previous == LOW) {
     menu++;
@@ -86,17 +86,17 @@ void loop(void)
     display.print("Auto");
 
     // Automode
-    if (temp <= 30) {
+    if (temp <= 29) {
       digitalWrite(Relay_IN1_Power, LOW);
       digitalWrite(Relay_IN2_Speed, LOW);
       auto_state = 0;
     }
-    if (temp > 35 && temp < 40) {
+    if (temp > 31 && temp < 35) {
       digitalWrite(Relay_IN1_Power, HIGH);
       digitalWrite(Relay_IN2_Speed, LOW);
       auto_state = 1;
     }
-    if (temp > 45) {
+    if (temp > 36) {
       digitalWrite(Relay_IN1_Power, HIGH);
       digitalWrite(Relay_IN2_Speed, HIGH);
       auto_state = 2;
